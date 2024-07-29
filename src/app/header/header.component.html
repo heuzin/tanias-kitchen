@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
   <div class="container-fluid">
-    <a class="navbar-brand" (click)="onSelect('recipe')" href="#"
+    <a
+      class="navbar-brand"
+      href="#"
+      [routerLink]="['']"
+      routerLinkActive="selected"
       >Tanias Kitchen</a
     >
     <button
@@ -17,7 +21,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#" (click)="onSelect('shopping-list')"
+          <a
+            class="nav-link"
+            href="#"
+            [routerLink]="['/cart']"
+            routerLinkActive="selected"
             >Cart</a
           >
         </li>

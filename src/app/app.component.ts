@@ -20,9 +20,4 @@ import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
 })
 export class AppComponent {
   title = 'tanias-kitchen';
-  loadedFeature: 'recipe' | 'shopping-list' = 'recipe';
-
-  onNavigate(feature: 'recipe' | 'shopping-list') {
-    this.loadedFeature = feature;
-  }
 }

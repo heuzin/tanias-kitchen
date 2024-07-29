@@ -14,7 +14,8 @@
         <a
           href="#"
           class="btn btn-primary hidden-link stretched-link"
-          (click)="onSelected(recipe())"
+          [routerLink]="['/recipe', recipe().id]"
+          routerLinkActive="selected"
           >{{ recipe().name }}</a
         >
       </div>

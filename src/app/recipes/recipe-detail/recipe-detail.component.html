@@ -1,13 +1,13 @@
 <div class="card">
   <img
-    [src]="recipe().imagePath"
-    alt="{{ recipe().name }}"
+    [src]="recipe?.imagePath"
+    alt="{{ recipe?.name }}"
     class="card-img-top"
   />
   <div class="card-body">
-    <h5 class="card-title">{{ recipe().name }}</h5>
+    <h5 class="card-title">{{ recipe?.name }}</h5>
     <p class="card-text">
-      {{ recipe().description }}
+      {{ recipe?.description }}
     </p>
   </div>
   <div class="card-body">
