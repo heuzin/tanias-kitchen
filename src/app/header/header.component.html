@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Tanias Kitchen</a>
+    <a class="navbar-brand" (click)="onSelect('recipe')" href="#"
+      >Tanias Kitchen</a
+    >
     <button
       class="navbar-toggler"
       type="button"
@@ -15,13 +17,8 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" href="#" (click)="onSelect('recipe')"
-            >Recipes</a
-          >
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="#" (click)="onSelect('shopping-list')"
-            >Shopping List</a
+            >Cart</a
           >
         </li>
       </ul>

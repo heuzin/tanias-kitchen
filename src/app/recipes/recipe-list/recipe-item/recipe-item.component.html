@@ -1,4 +1,4 @@
-<div class="card mb-3" style="max-width: 540px">
+<div class="card" style="max-width: 540px">
   <div class="row g-0">
     <div class="col-md-4">
       <img
@@ -11,13 +11,10 @@
       <div class="card-body">
         <h5 class="card-title">{{ recipe().name }}</h5>
         <p class="card-text">{{ recipe().description }}</p>
-        <p class="card-text">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </p>
         <a
           href="#"
           class="btn btn-primary hidden-link stretched-link"
-          (click)="onSelected()"
+          (click)="onSelected(recipe())"
           >{{ recipe().name }}</a
         >
       </div>

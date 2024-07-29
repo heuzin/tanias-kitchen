@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-md-5">
-    <app-recipe-list (recipeWasSelected)="onSelectedRecipe($event)" />
+    <app-recipe-list />
   </div>
   <div class="col-md-7">
-    @if (selectedRecipe) {
-    <app-recipe-detail [recipe]="selectedRecipe" />
+    @if (selectedRecipe()) {
+    <app-recipe-detail [recipe]="selectedRecipe()!" />
     } @else {
     <p>Please select a Recipe!</p>
     }

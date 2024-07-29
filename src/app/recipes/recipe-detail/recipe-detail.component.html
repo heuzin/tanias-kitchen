@@ -26,9 +26,11 @@
       </button>
       <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
         <li>
-          <a href="#" ngbDropdownItem>Add Ingredients to Shopping List</a>
+          <a (click)="onAddToShoppingList()" href="#" ngbDropdownItem
+            >To Shopping List</a
+          >
         </li>
-        <li><a href="#" ngbDropdownItem> Edit Recipe</a></li>
+        <li><a href="#" ngbDropdownItem>Edit Recipe</a></li>
         <li><a href="#" ngbDropdownItem>Delete Recipe</a></li>
       </ul>
     </div>
@@ -38,5 +40,13 @@
   <div class="col-xs-12">{{ recipe().description }}</div>
 </div>
 <div class="row">
-  <div class="col-xs-12">Ingredients</div>
+  <div class="col-xs-12">
+    <ul class="list-group">
+      @for (ingredient of recipe().ingredients; track ingredient.name) {
+      <li class="list-group-item">
+        {{ ingredient.name }} - {{ ingredient.amount }}
+      </li>
+      }
+    </ul>
+  </div>
 </div>
