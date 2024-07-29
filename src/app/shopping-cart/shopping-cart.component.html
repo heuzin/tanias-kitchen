@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-xs-10">
+    <div class="row">
+      <div class="col-md-8">
+        <h4>Shopping Cart</h4>
+        <div class="list-group list-group-flush">
+          @for (item of cartItems(); track item.name) {
+          <div class="list-group-item">
+            <div class="row">
+              <div class="col-md-2">
+                <img
+                  [src]="item.imagePath"
+                  alt="Rosca"
+                  class="rounded img-fluid"
+                />
+              </div>
+              <div class="col-md-3">
+                <a href="#" aria-current="true">{{ item.name }} </a>
+              </div>
+              <div class="col-md-2">${{ item.price }}</div>
+              <div class="col-md-2">
+                <form class="form-control">
+                  <option value="1">1</option>
+                </form>
+              </div>
+              <div class="col-md-2">
+                <button type="button" class="btn btn-danger">Remove</button>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="list-group list-group-flush">
+            <div class="list-group-item">
+              <h5>Subtotal ({{ totalItem }}) items</h5>
+              ${{ totalPrice }}
+            </div>
+            <div class="list-group-item d-grid gap-2">
+              <button type="button" class="btn btn-primary">
+                Proceed To Checkout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,52 +1,16 @@
-<div class="row">
-  <div class="col-xs-12">
-    <img
-      [src]="recipe().imagePath"
-      alt="{{ recipe().name }}"
-      class="img-fluid"
-    />
+<div class="card">
+  <img
+    [src]="recipe().imagePath"
+    alt="{{ recipe().name }}"
+    class="card-img-top"
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ recipe().name }}</h5>
+    <p class="card-text">
+      {{ recipe().description }}
+    </p>
   </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <h1>{{ recipe().name }}</h1>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <div class="dropdown" ngbDropdown>
-      <button
-        type="button"
-        class="btn btn-primary"
-        id="dropdownMenuButton1"
-        aria-expanded="false"
-        ngbDropdownToggle
-      >
-        Manage Recipe <span class="caret"></span>
-      </button>
-      <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
-        <li>
-          <a (click)="onAddToShoppingList()" href="#" ngbDropdownItem
-            >To Shopping List</a
-          >
-        </li>
-        <li><a href="#" ngbDropdownItem>Edit Recipe</a></li>
-        <li><a href="#" ngbDropdownItem>Delete Recipe</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">{{ recipe().description }}</div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <ul class="list-group">
-      @for (ingredient of recipe().ingredients; track ingredient.name) {
-      <li class="list-group-item">
-        {{ ingredient.name }} - {{ ingredient.amount }}
-      </li>
-      }
-    </ul>
+  <div class="card-body">
+    <a href="#" class="btn btn-primary">View Details</a>
   </div>
 </div>

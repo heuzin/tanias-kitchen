@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +12,11 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     RouterOutlet,
     HeaderComponent,
     RecipesComponent,
-    ShoppingListComponent,
+    ShoppingCartComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers: [ShoppingListService],
+  providers: [ShoppingCartService],
 })
 export class AppComponent {
   title = 'tanias-kitchen';
