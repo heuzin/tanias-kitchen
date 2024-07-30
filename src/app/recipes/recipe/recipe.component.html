@@ -32,18 +32,41 @@
         <div class="list-group-item">
           <div class="row">
             <div class="col">Status:</div>
-            <div class="col">In Stock</div>
+            <div class="col">
+              {{
+                recipe && recipe.countInStock > 0 ? "In Stock" : "Out of Stock"
+              }}
+            </div>
           </div>
         </div>
+        @if (recipe && recipe.countInStock > 0) {
         <div class="list-group-item">
           <div class="row">
-            <div class="col">Qty:</div>
-            <div class="col">${{ recipe?.qty }}</div>
+            <div class="col"><label for="">Qty:</label></div>
+            <div class="col">
+              <select
+                class="form-control"
+                id="countInStock"
+                [formControl]="selectedOption"
+              >
+                @for (count of countInStock(); track $index) {
+                <option [value]="count + 1">{{ count + 1 }}</option>
+                }
+              </select>
+            </div>
           </div>
         </div>
+        }
         <div class="list-group-item">
           <div class="row">
-            <button type="button" class="btn btn-primary">Add To Cart</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              [disabled]="recipe && recipe.countInStock === 0"
+              (click)="addToCart(recipe!)"
+            >
+              Add To Cart
+            </button>
           </div>
         </div>
       </div>

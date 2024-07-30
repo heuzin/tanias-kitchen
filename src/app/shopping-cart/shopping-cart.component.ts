@@ -12,8 +12,16 @@ export class ShoppingCartComponent {
   private shoppingCartService = inject(ShoppingCartService);
   cartItems = computed(() => this.shoppingCartService.allCartItems());
 
-  totalItem = this.cartItems().reduce((acc, cur) => acc + cur.qty, 0);
-  totalPrice = this.cartItems()
-    .reduce((acc, cur) => acc + cur.qty * cur.price, 0)
-    .toFixed(2);
+  totalItem = computed(() =>
+    this.cartItems().reduce((acc, cur) => acc + cur.qty, 0)
+  );
+  totalPrice = computed(() =>
+    this.cartItems()
+      .reduce((acc, cur) => acc + cur.qty * cur.recipe.price, 0)
+      .toFixed(2)
+  );
+
+  removeItemFromCart(id: string) {
+    this.shoppingCartService.removeItemFromCart(id);
+  }
 }

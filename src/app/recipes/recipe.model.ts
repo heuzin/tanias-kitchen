@@ -1,10 +1,8 @@
-export class Recipe {
-  constructor(
-    public id: string,
-    public name: string,
-    public description: string,
-    public imagePath: string,
-    public price: number,
-    public qty: number
-  ) {}
+export interface Recipe {
+  id: string;
+  name: string;
+  description: string;
+  imagePath: string;
+  price: number;
+  countInStock: number;
 }
