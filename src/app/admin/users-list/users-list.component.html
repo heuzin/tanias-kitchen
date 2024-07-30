@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col"><h5>Products</h5></div>
+  <div class="col text-end">
+    <button class="btn btn-primary">Create Product</button>
+  </div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">NAME</th>
+      <th scope="col">EMAIL</th>
+      <th scope="col">ADMIN</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (user of users(); track user.id) {
+    <tr>
+      <th scope="row">{{ user.id }}</th>
+      <td>
+        {{ user.name }}
+      </td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.isAdmin }}</td>
+      <td></td>
+    </tr>
+    }
+  </tbody>
+</table>

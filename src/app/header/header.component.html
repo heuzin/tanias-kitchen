@@ -41,14 +41,54 @@
             aria-expanded="false"
             ngbDropdownToggle
           >
-            Manage
+            User Name
           </a>
           <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
             <li>
-              <a ngbDropdownItem href="#">Save Data</a>
+              <a ngbDropdownItem href="#">Profile</a>
             </li>
             <li>
-              <a ngbDropdownItem href="#">Fetch Data</a>
+              <a ngbDropdownItem href="#">Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown" ngbDropdown>
+          <a
+            class="nav-link"
+            id="dropdownMenuButton1"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            ngbDropdownToggle
+          >
+            Admin
+          </a>
+          <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+            <li>
+              <a
+                ngbDropdownItem
+                [routerLink]="['/admin/users']"
+                routerLinkActive="active"
+                >Users</a
+              >
+            </li>
+            <li>
+              <a
+                ngbDropdownItem
+                [routerLink]="['/admin/products']"
+                routerLinkActive="active"
+                >Products</a
+              >
+            </li>
+            <li>
+              <a
+                ngbDropdownItem
+                [routerLink]="['/admin/orders']"
+                routerLinkActive="active"
+                >Orders</a
+              >
             </li>
           </ul>
         </li>
