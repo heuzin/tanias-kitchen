@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
+import { RecipeService } from './recipes/recipe.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers: [ShoppingCartService],
+  providers: [ShoppingCartService, RecipeService],
 })
 export class AppComponent {
   title = 'tanias-kitchen';

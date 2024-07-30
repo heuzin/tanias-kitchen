@@ -1,16 +1,18 @@
+@if (recipe) {
 <div class="card">
-  <img
-    [src]="recipe?.imagePath"
-    alt="{{ recipe?.name }}"
-    class="card-img-top"
-  />
+  <img [src]="recipe.imagePath" alt="{{ recipe.name }}" class="card-img-top" />
   <div class="card-body">
-    <h5 class="card-title">{{ recipe?.name }}</h5>
+    <h5 class="card-title">{{ recipe.name }}</h5>
     <p class="card-text">
-      {{ recipe?.description }}
+      {{ recipe.description }}
     </p>
   </div>
   <div class="card-body">
-    <a href="#" class="btn btn-primary">View Details</a>
+    <a href="#" class="btn btn-primary" [routerLink]="['recipe', recipe.id]"
+      >View Details</a
+    >
   </div>
 </div>
+} @else {
+<p>Please select a Recipe!</p>
+}

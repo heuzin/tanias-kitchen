@@ -7,8 +7,8 @@ export class CartItem extends Recipe {
     description: string,
     imagePath: string,
     price: number,
-    public qty: number
+    qty: number
   ) {
-    super(id, name, description, imagePath, price);
+    super(id, name, description, imagePath, price, qty);
   }
 }

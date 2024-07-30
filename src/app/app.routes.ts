@@ -1,14 +1,16 @@
 import { Routes } from '@angular/router';
 import { RecipesComponent } from './recipes/recipes.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-
-import { routes as recipeRoutes } from './recipes/recipe.routes';
+import { RecipeComponent } from './recipe/recipe.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: RecipesComponent,
-    children: recipeRoutes,
+  },
+  {
+    path: 'recipe/:recipeId',
+    component: RecipeComponent,
   },
   {
     path: 'cart',

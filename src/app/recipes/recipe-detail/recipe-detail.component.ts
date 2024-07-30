@@ -1,28 +1,29 @@
 import { Component, DestroyRef, inject, input } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-detail',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './recipe-detail.component.html',
   styleUrl: './recipe-detail.component.css',
 })
 export class RecipeDetailComponent {
   recipe?: Recipe;
 
-  private destroyRef = inject(DestroyRef);
-  private activatedRoute = inject(ActivatedRoute);
   private recipeService = inject(RecipeService);
+  private activatedRoute = inject(ActivatedRoute);
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    const subscription = this.activatedRoute.paramMap.subscribe({
-      next: (paramMap) =>
-        (this.recipe = this.recipeService
+    const subscription = this.activatedRoute.queryParamMap.subscribe({
+      next: (paramMap) => {
+        return (this.recipe = this.recipeService
           .allRecipes()
-          .find((recipe) => recipe.id === paramMap.get('recipeId'))),
+          .find((recipe) => recipe.id === paramMap.get('recipeId')));
+      },
     });
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
