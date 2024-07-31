@@ -1,0 +1,43 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" formControlName="name" />
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <input
+      type="text"
+      class="form-control"
+      id="description"
+      formControlName="description"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="imagePath" class="form-label">Image</label>
+    <input
+      type="text"
+      class="form-control"
+      id="imagePath"
+      formControlName="imagePath"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="price" class="form-label">Price</label>
+    <input
+      type="number"
+      class="form-control"
+      id="price"
+      formControlName="price"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="countInStock" class="form-label">Count In Stock</label>
+    <input
+      type="number"
+      class="form-control"
+      id="countInStock"
+      formControlName="countInStock"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Create/Update</button>
+</form>

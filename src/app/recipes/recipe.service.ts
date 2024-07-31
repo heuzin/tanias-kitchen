@@ -41,4 +41,8 @@ export class RecipeService {
   selectRecipe(recipe: Recipe) {
     this.selectedRecipe.set(recipe);
   }
+
+  addRecipe(recipe: Recipe) {
+    this.recipes.update((prevRecipes) => [...prevRecipes, recipe]);
+  }
 }
