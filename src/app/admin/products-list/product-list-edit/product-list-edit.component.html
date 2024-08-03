@@ -1,4 +1,7 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+@if (loading()) {
+<app-loading-spinner />
+} @else {
+<form [formGroup]="form()" (ngSubmit)="onSubmit()">
   <div class="mb-3">
     <label for="name" class="form-label">Name</label>
     <input type="text" class="form-control" id="name" formControlName="name" />
@@ -19,8 +22,14 @@
       class="form-control"
       id="imagePath"
       formControlName="imagePath"
+      #imagePath
     />
   </div>
+  @if (imagePath.value) {
+  <div class="mb-3">
+    <img [src]="imagePath.value" alt="path" width="200" />
+  </div>
+  }
   <div class="mb-3">
     <label for="price" class="form-label">Price</label>
     <input
@@ -39,5 +48,8 @@
       formControlName="countInStock"
     />
   </div>
-  <button type="submit" class="btn btn-primary">Create/Update</button>
+  <button type="submit" [disabled]="!form().valid" class="btn btn-primary">
+    Create/Update
+  </button>
 </form>
+}

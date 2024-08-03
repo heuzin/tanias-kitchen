@@ -1,15 +1,17 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
-import { RecipeService } from '../recipe.service';
+import { RecipeService } from '../../services/recipe.service';
+import { LoaderService } from '../../services/loader.service';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-recipe-list',
   standalone: true,
-  imports: [RecipeItemComponent],
+  imports: [RecipeItemComponent, LoadingSpinnerComponent],
   templateUrl: './recipe-list.component.html',
   styleUrl: './recipe-list.component.css',
 })
 export class RecipeListComponent {
-  private recipeService = inject(RecipeService);
-  recipes = computed(() => this.recipeService.allRecipes());
+  recipes = inject(RecipeService).allRecipes;
+  loading = inject(LoaderService).loading;
 }

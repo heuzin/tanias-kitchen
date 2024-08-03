@@ -1,11 +1,11 @@
 import { Component, computed, DestroyRef, inject } from '@angular/core';
-import { RecipeService } from '../recipe.service';
+import { RecipeService } from '../../services/recipe.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Recipe } from '../recipe.model';
+import { Recipe } from '../../models/recipe.model';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
-import { ShoppingCartService } from '../../shopping-cart/shopping-cart.service';
-import { CartItem } from '../../shopping-cart/cart-item.model';
+import { CartItem } from '../../models/cart-item.model';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
   selector: 'app-recipe',
@@ -44,7 +44,6 @@ export class RecipeComponent {
       cartItemId: new Date().toISOString(),
       qty: this.selectedOption.value,
     };
-    console.log(this.selectedOption.value);
     this.shoppingCartService.addToCart(cartItem);
     this.router.navigate(['cart']);
   }

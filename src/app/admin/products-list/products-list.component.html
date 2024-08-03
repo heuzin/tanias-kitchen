@@ -1,15 +1,20 @@
 <div class="row">
   <div class="col"><h5>Products</h5></div>
   <div class="col text-end">
-    <button class="btn btn-primary">Create Product</button>
+    <button class="btn btn-primary" (click)="onClick()">Create Product</button>
   </div>
 </div>
+
+@if(loading()) {
+<app-loading-spinner />
+} @else {
 <table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">ID</th>
       <th scope="col">NAME</th>
       <th scope="col">PRICE</th>
+      <th scope="col">Count In Stock</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -18,17 +23,28 @@
     <tr>
       <th scope="row">{{ recipe.id }}</th>
       <td>
-        <img
-          [src]="recipe.imagePath"
-          [alt]="'The flag of ' + recipe.name"
-          class="me-2"
-          style="width: 20px"
-        />
         {{ recipe.name }}
       </td>
       <td>{{ recipe.price }}</td>
-      <td></td>
+      <td>{{ recipe.countInStock }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="onDelete(recipe.id)"
+        >
+          Delete
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="onEdit(recipe.id)"
+        >
+          Edit
+        </button>
+      </td>
     </tr>
     }
   </tbody>
 </table>
+}

@@ -1,7 +1,9 @@
 <div class="row">
   <div class="col-xs-12">
-    @for (recipe of recipes(); track recipe.id) {
+    @if (loading()) {
+    <app-loading-spinner />
+    } @else { @for (recipe of recipes(); track recipe.id) {
     <app-recipe-item [recipe]="recipe" />
-    }
+    } }
   </div>
 </div>

@@ -1,0 +1,36 @@
+@if (error) {
+<div class="alert alert-danger">
+  <p>{{ error }}</p>
+</div>
+} @if (loading()) {
+<app-loading-spinner />
+} @else {
+<h5>Sign In</h5>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      formControlName="email"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      formControlName="password"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Sign In</button>
+</form>
+<div class="row py-3">
+  <div class="col">
+    New Customer ?
+    <a [routerLink]="['/register']" href="#">Register</a>
+  </div>
+</div>
+}

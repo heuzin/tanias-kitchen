@@ -1,50 +1,34 @@
 import { Component, computed, inject } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { RecipeService } from '../../recipes/recipe.service';
-
-interface Country {
-  name: string;
-  flag: string;
-  area: number;
-  population: number;
-}
-
-const COUNTRIES: Country[] = [
-  {
-    name: 'Russia',
-    flag: 'f/f3/Flag_of_Russia.svg',
-    area: 17075200,
-    population: 146989754,
-  },
-  {
-    name: 'Canada',
-    flag: 'c/cf/Flag_of_Canada.svg',
-    area: 9976140,
-    population: 36624199,
-  },
-  {
-    name: 'United States',
-    flag: 'a/a4/Flag_of_the_United_States.svg',
-    area: 9629091,
-    population: 324459463,
-  },
-  {
-    name: 'China',
-    flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
-    area: 9596960,
-    population: 1409517397,
-  },
-];
+import { RecipeService } from '../../services/recipe.service';
+import { Router } from '@angular/router';
+import { v4 as uuidv4 } from 'uuid';
+import { LoaderService } from '../../services/loader.service';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, LoadingSpinnerComponent],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.css',
 })
 export class ProductsListComponent {
-  countries = COUNTRIES;
+  private router = inject(Router);
   private recipeService = inject(RecipeService);
+  loading = inject(LoaderService).loading;
   recipes = computed(() => this.recipeService.allRecipes());
+
+  onClick() {
+    const id = uuidv4();
+    this.router.navigate(['admin', 'products', id, 'edit']);
+  }
+
+  async onDelete(recipeId: string) {
+    await this.recipeService.deleteRecipe(recipeId);
+  }
+
+  onEdit(recipeId: string) {
+    this.router.navigate(['admin', 'products', recipeId, 'edit']);
+  }
 }

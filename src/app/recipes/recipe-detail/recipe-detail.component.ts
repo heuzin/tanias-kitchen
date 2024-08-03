@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, input } from '@angular/core';
-import { Recipe } from '../recipe.model';
-import { RecipeService } from '../recipe.service';
+import { Recipe } from '../../models/recipe.model';
+import { RecipeService } from '../../services/recipe.service';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
