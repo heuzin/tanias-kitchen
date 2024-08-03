@@ -17,7 +17,7 @@ export class LoggedinGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): MaybeAsync<GuardResult> {
-    const isAuthenticated = !this.authService.currentUser();
+    const isAuthenticated = !this.authService.authenticated();
     if (isAuthenticated) {
       return true;
     }

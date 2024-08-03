@@ -57,10 +57,22 @@
           </a>
           <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
             <li>
-              <a ngbDropdownItem href="#">Profile</a>
+              <a
+                ngbDropdownItem
+                href="#"
+                [routerLink]="['/profile']"
+                routerLinkActive="active"
+                >Profile</a
+              >
             </li>
             <li>
-              <a ngbDropdownItem href="#" (click)="onLogout()">Logout</a>
+              <a
+                ngbDropdownItem
+                href="#"
+                [routerLink]="['/']"
+                (click)="onLogout()"
+                >Logout</a
+              >
             </li>
           </ul>
         </li>

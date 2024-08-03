@@ -1,14 +1,15 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { catchError, tap, throwError } from 'rxjs';
-import { User } from '../models/user.model';
+import { catchError, tap } from 'rxjs';
+import { Auth } from '../models/auth.model';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { UserService } from './user.service';
+import { CustomError } from '../shared/Error';
 
 interface AuthResponseData {
   idToken: string;
   email: string;
-  displayName: string;
   refreshToken: string;
   expiresIn: string;
   localId: string;
@@ -16,14 +17,15 @@ interface AuthResponseData {
 }
 
 @Injectable({ providedIn: 'root' })
-export class AuthService {
+export class AuthService extends CustomError {
   tokenExpirationTimer: any;
 
-  private user = signal<User | null>(null);
+  private auth = signal<Auth | null>(null);
+  private userService = inject(UserService);
   private httpClient = inject(HttpClient);
   private route = inject(Router);
 
-  currentUser = this.user.asReadonly();
+  authenticated = this.auth.asReadonly();
 
   signup(email: string, password: string) {
     return this.httpClient
@@ -41,7 +43,6 @@ export class AuthService {
           this.handleAuthentication(
             resData.email,
             resData.localId,
-            resData.displayName,
             resData.idToken,
             +resData.expiresIn
           );
@@ -66,7 +67,6 @@ export class AuthService {
           this.handleAuthentication(
             resData.email,
             resData.localId,
-            resData.displayName,
             resData.idToken,
             +resData.expiresIn
           );
@@ -85,26 +85,27 @@ export class AuthService {
       _token: string;
       _tokenExpirationDate: string;
     } = JSON.parse(userData);
-    const loadedUser = new User(
+    const loadedUser = new Auth(
       user.email,
       user.id,
-      user.displayName,
       user._token,
       new Date(user._tokenExpirationDate)
     );
+
+    this.userService.getUserInfo(user._token).subscribe();
 
     if (loadedUser.token) {
       const experationDuration =
         new Date(user._tokenExpirationDate).getTime() - new Date().getTime();
       this.autoLogout(experationDuration);
-      this.user.set(loadedUser);
+      this.auth.set(loadedUser);
     }
   }
 
   logout() {
     localStorage.removeItem('userData');
-    this.user.set(null);
-    this.route.navigate(['login']);
+    this.auth.set(null);
+    this.route.navigate(['']);
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }
@@ -120,20 +121,27 @@ export class AuthService {
   private handleAuthentication(
     email: string,
     userId: string,
-    displayName: string,
     token: string,
     expiresIn: number
   ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    const user = new User(email, userId, displayName, token, expirationDate);
-    this.user.set(user);
+    const user = new Auth(email, userId, token, expirationDate);
+    this.auth.set(user);
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
   }
 
-  private handlError(errorRes: HttpErrorResponse) {
-    let errorMessage = errorRes.error.error.message;
-
-    return throwError(() => new Error(errorMessage));
+  updateUser(idToken: string, displayName: string, photoUrl: string) {
+    return this.httpClient
+      .post<AuthResponseData>(
+        `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.apiKey}`,
+        {
+          idToken,
+          displayName,
+          photoUrl,
+          returnSecureToken: true,
+        }
+      )
+      .pipe(catchError(this.handlError));
   }
 }
