@@ -1,7 +1,5 @@
 @if (error) {
-<div class="alert alert-danger">
-  <p>{{ error }}</p>
-</div>
+<app-error-message [error]="error" />
 } @if (loading()) {
 <app-loading-spinner />
 } @else {

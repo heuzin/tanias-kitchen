@@ -63,7 +63,7 @@ export class AuthService extends CustomError {
       .pipe(
         catchError(this.handlError),
         tap((resData) => {
-          console.log(resData);
+          this.userService.getUserInfo(resData.idToken).subscribe();
           this.handleAuthentication(
             resData.email,
             resData.localId,
@@ -92,9 +92,8 @@ export class AuthService extends CustomError {
       new Date(user._tokenExpirationDate)
     );
 
-    this.userService.getUserInfo(user._token).subscribe();
-
     if (loadedUser.token) {
+      this.userService.getUserInfo(user._token).subscribe();
       const experationDuration =
         new Date(user._tokenExpirationDate).getTime() - new Date().getTime();
       this.autoLogout(experationDuration);
@@ -129,19 +128,5 @@ export class AuthService extends CustomError {
     this.auth.set(user);
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
-  }
-
-  updateUser(idToken: string, displayName: string, photoUrl: string) {
-    return this.httpClient
-      .post<AuthResponseData>(
-        `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.apiKey}`,
-        {
-          idToken,
-          displayName,
-          photoUrl,
-          returnSecureToken: true,
-        }
-      )
-      .pipe(catchError(this.handlError));
   }
 }

@@ -9,6 +9,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { LoaderService } from '../services/loader.service';
 import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
+import { ErrorMessageComponent } from '../shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinn
     RouterLink,
     LoadingSpinnerComponent,
     LoadingSpinnerComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
@@ -26,9 +28,9 @@ export class RegisterComponent {
   private router = inject(Router);
   private authService = inject(AuthService);
   private loaderService = inject(LoaderService);
-  error: string | null = null;
 
   loading = computed(() => this.loaderService.loading());
+  error: string | null = null;
 
   form = new FormGroup({
     name: new FormControl('', {

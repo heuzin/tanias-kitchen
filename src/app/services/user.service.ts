@@ -22,9 +22,22 @@ export class UserService extends CustomError {
       .pipe(
         catchError(this.handlError),
         tap((resData) => {
-          console.log(resData);
           this.user.set(resData.users[0]);
         })
       );
+  }
+
+  updateUser(idToken: string, displayName: string, photoUrl: string) {
+    return this.httpClient
+      .post<User>(
+        `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.apiKey}`,
+        {
+          idToken,
+          displayName,
+          photoUrl,
+          returnSecureToken: true,
+        }
+      )
+      .pipe(catchError(this.handlError));
   }
 }

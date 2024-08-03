@@ -9,11 +9,17 @@ import { Router, RouterLink } from '@angular/router';
 import { LoaderService } from '../services/loader.service';
 import { AuthService } from '../services/auth.service';
 import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
+import { ErrorMessageComponent } from '../shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, LoadingSpinnerComponent],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    LoadingSpinnerComponent,
+    ErrorMessageComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })

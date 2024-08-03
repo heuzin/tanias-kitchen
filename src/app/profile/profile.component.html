@@ -1,6 +1,11 @@
+@if (error) {
+<app-error-message [error]="error" />
+} @if (loading()) {
+<app-loading-spinner />
+} @else {
 <div class="row">
   <div class="col-md-3">
-    <h5>Products</h5>
+    <h5>User Profile</h5>
     <form [formGroup]="form()" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
@@ -43,3 +48,4 @@
     </form>
   </div>
 </div>
+}
