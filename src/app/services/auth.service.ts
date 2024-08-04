@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { UserService } from './user.service';
 import { CustomError } from '../shared/Error';
+import { UserFirestore } from '../models/user.firestore.model';
+import { UserFirestoreService } from './user.firestore.service';
 
 interface AuthResponseData {
   idToken: string;
@@ -23,6 +25,7 @@ export class AuthService extends CustomError {
   private route = inject(Router);
   private httpClient = inject(HttpClient);
   private userService = inject(UserService);
+  private userFirestoreService = inject(UserFirestoreService);
   private auth = signal<Auth | null>(null);
 
   authenticated = this.auth.asReadonly();
@@ -40,6 +43,12 @@ export class AuthService extends CustomError {
       .pipe(
         catchError(this.handlError),
         tap((resData) => {
+          const userFirestore: UserFirestore = {
+            localId: resData.localId,
+            email: resData.email,
+            isAdmin: false,
+          };
+          this.userFirestoreService.addUser(userFirestore);
           this.handleAuthentication(
             resData.email,
             resData.localId,

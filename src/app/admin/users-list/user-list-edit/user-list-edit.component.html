@@ -1,0 +1,28 @@
+@if (loading()) {
+<app-loading-spinner />
+} @else {
+<div class="row align-items-center justify-content-center">
+  <div class="col-md-3">
+    <h5>Edit User</h5>
+
+    <p>Name: {{ user()?.displayName }}</p>
+    <p>Email: {{ user()?.email }}</p>
+    <form [formGroup]="form()" (ngSubmit)="onSubmit()">
+      <div class="mb-3 control">
+        <label for="isAdmin" class="form-label">
+          <input type="checkbox" id="isAdmin" formControlName="isAdmin" />
+          Admin</label
+        >
+      </div>
+      <button
+        type="submit"
+        [disabled]="form().value.isAdmin === user()?.isAdmin"
+        (click)="onSubmit()"
+        class="btn btn-primary"
+      >
+        Update
+      </button>
+    </form>
+  </div>
+</div>
+}

@@ -4,12 +4,14 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { CustomError } from '../shared/Error';
+import { UserFirestoreService } from './user.firestore.service';
 import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService extends CustomError {
   private user = signal<User | null>(null);
   private httpClient = inject(HttpClient);
+  private userFirestoreService = inject(UserFirestoreService);
 
   currentUser = this.user.asReadonly();
 
@@ -53,7 +55,7 @@ export class UserService extends CustomError {
       );
   }
 
-  updateUser(idToken: string, displayName: string, photoUrl: string) {
+  updateProfile(idToken: string, displayName: string, photoUrl: string) {
     return this.httpClient
       .post<User>(
         `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.apiKey}`,
@@ -64,6 +66,43 @@ export class UserService extends CustomError {
           returnSecureToken: true,
         }
       )
-      .pipe(catchError(this.handlError));
+      .pipe(
+        catchError(this.handlError),
+        tap((resData) => {
+          const {
+            localId,
+            email,
+            emailVerified,
+            displayName,
+            providerUserInfo,
+            validSince,
+            disabled,
+            lastLoginAt,
+            createdAt,
+            customAuth,
+            photoUrl,
+          } = resData;
+          this.userFirestoreService.updateUser({
+            localId,
+            email,
+            displayName,
+            photoUrl,
+          });
+          const user = new User(
+            localId,
+            email,
+            emailVerified,
+            providerUserInfo,
+            validSince,
+            disabled,
+            lastLoginAt,
+            createdAt,
+            customAuth,
+            displayName,
+            photoUrl
+          );
+          this.user.set(user);
+        })
+      );
   }
 }

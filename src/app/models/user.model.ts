@@ -9,7 +9,7 @@ export class User {
     public lastLoginAt: string,
     public createdAt: string,
     public customAuth: boolean,
-    public _displayName: string,
+    private _displayName: string,
     private _photoUrl: string
   ) {}
 

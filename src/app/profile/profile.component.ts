@@ -33,44 +33,35 @@ export class ProfileComponent {
   loading = computed(() => this.loaderService.loading());
   currentUser = computed(() => this.userService.currentUser());
 
-  // form = computed(
-  //   () =>
-  //     new FormGroup({
-  //       name: new FormControl(this.currentUser()?.displayName, {
-  //         validators: [Validators.required, Validators.minLength(3)],
-  //       }),
-  //       email: new FormControl(this.currentUser()?.email, {
-  //         validators: [Validators.required, Validators.email],
-  //       }),
-  //       password: new FormControl('', {
-  //         validators: [Validators.required, Validators.minLength(6)],
-  //       }),
-  //       confirmPassword: new FormControl('', {
-  //         validators: [Validators.required, Validators.minLength(6)],
-  //       }),
-  //     })
-  // );
+  form = computed(
+    () =>
+      new FormGroup({
+        name: new FormControl(this.currentUser()?.displayName, {
+          validators: [Validators.required, Validators.minLength(3)],
+        }),
+        photoUrl: new FormControl(this.currentUser()?.photoUrl, {
+          validators: [Validators.required, Validators.email],
+        }),
+      })
+  );
 
-  // onSubmit() {
-  //   const displayName = this.form().value.name;
-  //   if (!displayName || !this.authToken) return;
+  onSubmit() {
+    const displayName = this.form().value.name;
+    const photoUrl = this.form().value.photoUrl;
+    if (!displayName || !photoUrl || !this.authToken) return;
 
-  //   this.loaderService.showLoader();
-  //   this.userService
-  //     .updateUser(
-  //       this.authToken,
-  //       displayName,
-  //       'https://imgv3.fotor.com/images/cover-photo-image/AI-illustration-of-a-dragon-by-Fotor-AI-text-to-image-generator.jpg'
-  //     )
-  //     .subscribe(
-  //       (resData) => {
-  //         console.log(resData);
-  //         this.loaderService.hideLoader();
-  //       },
-  //       (errorMessage) => {
-  //         this.error = errorMessage;
-  //         this.loaderService.hideLoader();
-  //       }
-  //     );
-  // }
+    this.loaderService.showLoader();
+    this.userService
+      .updateProfile(this.authToken, displayName, photoUrl)
+      .subscribe(
+        (resData) => {
+          console.log(resData);
+          this.loaderService.hideLoader();
+        },
+        (errorMessage) => {
+          this.error = errorMessage;
+          this.loaderService.hideLoader();
+        }
+      );
+  }
 }

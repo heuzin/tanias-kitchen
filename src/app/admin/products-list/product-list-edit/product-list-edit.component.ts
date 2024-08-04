@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, inject } from '@angular/core';
+import { Component, computed, DestroyRef, inject, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -17,7 +17,7 @@ import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading
   templateUrl: './product-list-edit.component.html',
   styleUrl: './product-list-edit.component.css',
 })
-export class ProductListEditComponent {
+export class ProductListEditComponent implements OnInit {
   productId = '';
 
   private router = inject(Router);

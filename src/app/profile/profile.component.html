@@ -13,19 +13,27 @@
         class="img-fluid rounded-start"
       />
     </div>
-    <div class="mb-3">
-      <p>Name: {{ currentUser()?.displayName }}</p>
-    </div>
-    <div class="mb-3">
-      <p>Email: {{ currentUser()?.email }}</p>
-    </div>
-    <div class="mb-3">
-      <p></p>
-      <p>Email: {{ currentUser()?.createdAt | date : "medium" }}</p>
-    </div>
-    <div class="mb-3">
-      <p></p>
-    </div>
+    <form [formGroup]="form()" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="photoUrl" class="form-label">Photo Url</label>
+        <input
+          type="text"
+          class="form-control"
+          id="photoUrl"
+          formControlName="photoUrl"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
   </div>
   <div class="col-md-9">
     <table class="table table-striped">
