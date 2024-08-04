@@ -32,7 +32,6 @@
       </ul>
       <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
         @if (!isAuthenticated()) {
-
         <li class="nav-item">
           <a
             class="nav-link"
@@ -78,6 +77,7 @@
         </li>
         }
       </ul>
+      @if (isAuthenticated() && isAdming()) {
       <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown" ngbDropdown>
           <a
@@ -118,6 +118,7 @@
           </ul>
         </li>
       </ul>
+      }
       <form class="d-flex">
         <input
           class="form-control me-2"

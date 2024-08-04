@@ -7,9 +7,10 @@ import { AdminComponent } from './admin/admin.component';
 import { routes as adminRoutes } from './admin/admin.routes';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { LoggedinGuard } from './guards/loggedin.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { LoggedinGuard } from './guards/loggedin.guard';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,8 @@ export const routes: Routes = [
     path: 'admin',
     component: AdminComponent,
     children: adminRoutes,
+    canActivate: [AdminGuard],
+    // canActivateChild: [AdminGuard],
   },
   {
     path: 'login',
