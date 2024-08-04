@@ -6,46 +6,52 @@
 <div class="row">
   <div class="col-md-3">
     <h5>User Profile</h5>
-    <form [formGroup]="form()" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="name"
-          formControlName="name"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          formControlName="email"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          formControlName="password"
-          #imagePath
-        />
-      </div>
-      <div class="mb-3">
-        <label for="confirmPassword" class="form-label">Confirm Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="confirmPassword"
-          formControlName="confirmPassword"
-        />
-      </div>
-      <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+    <div class="mb-3">
+      <img
+        [src]="currentUser()?.photoUrl"
+        alt="profile"
+        class="img-fluid rounded-start"
+      />
+    </div>
+    <div class="mb-3">
+      <p>Name: {{ currentUser()?.displayName }}</p>
+    </div>
+    <div class="mb-3">
+      <p>Email: {{ currentUser()?.email }}</p>
+    </div>
+    <div class="mb-3">
+      <p></p>
+      <p>Email: {{ currentUser()?.createdAt | date : "medium" }}</p>
+    </div>
+    <div class="mb-3">
+      <p></p>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">DATE</th>
+          <th scope="col">TOTAL</th>
+          <th scope="col">PAID</th>
+          <th scope="col">DELIVERED</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">66a91d467376a4e9c402aac6</th>
+          <td>2024-07-30</td>
+          <td>0</td>
+          <td>False</td>
+          <td>False</td>
+          <td>
+            <button type="button" class="btn btn-secondary">Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 }

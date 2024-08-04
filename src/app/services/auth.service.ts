@@ -20,10 +20,10 @@ interface AuthResponseData {
 export class AuthService extends CustomError {
   tokenExpirationTimer: any;
 
-  private auth = signal<Auth | null>(null);
-  private userService = inject(UserService);
-  private httpClient = inject(HttpClient);
   private route = inject(Router);
+  private httpClient = inject(HttpClient);
+  private userService = inject(UserService);
+  private auth = signal<Auth | null>(null);
 
   authenticated = this.auth.asReadonly();
 
